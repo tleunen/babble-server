@@ -35,23 +35,17 @@ io.on('connection', function(socket){
 
     // send the welcome message and ask him for his username
     socket.emit('send:message',  buildMessage('Babble', Config.WELCOME_TEXT));
-    socket.emit('username_fs', buildMessage('Babble', 'Please, enter your username'));
 
     // the client sends his username
     socket.on('send:username', function(username, callback) {
         username = username.trim();
-        var callbackObj = {
-            username: username,
-            auth: false
-        };
 
         // Check the validity of the username
         if(UserManager.isUsernameAvailable(username)) {
             user.authenticated = true;
             user.name = username;
 
-            callbackObj.auth = true;
-            callback(callbackObj);
+            callback(user.authenticated);
 
             // send the history
             socket.emit('send:history', ChatHistory.getMessages());
@@ -61,7 +55,7 @@ io.on('connection', function(socket){
             broadcast('user:join', buildMessage(username), user);
         }
         else {
-            callback(callbackObj);
+            callback(false);
         }
     });
 
