@@ -1,0 +1,12 @@
+{
+  "name": "babble-server",
+  "version": "1.0.0",
+  "description": "Babble chat server side",
+  "author": "Tommy Leunen",
+  "dependencies": {
+    "socket.io": "^1.1.0"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  }
+}
