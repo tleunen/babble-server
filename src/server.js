@@ -27,6 +27,17 @@ function broadcast(type, message, exceptUser) {
     }
 }
 
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;"
+  };
+function escapeHtml(string) {
+    return String(string).replace(/[&<>]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
 
 io.on('connection', function(socket){
     // Add the user inside our manager
@@ -61,7 +72,7 @@ io.on('connection', function(socket){
     // The client sends a message
     socket.on('send:message', function(message) {
         if(user.authenticated) {
-            broadcast('send:message', buildMessage(user.name, message));
+            broadcast('send:message', buildMessage(user.name, escapeHtml(message)));
         }
     });
 
