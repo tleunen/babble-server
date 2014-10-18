@@ -78,7 +78,7 @@ io.on('connection', function(socket){
 
 
 // var server = require('http').createServer();
-// server.listen(Config.SOCKET_PORT, 'localhost');
+// server.listen(process.env.PORT || Config.SOCKET_PORT, 'localhost');
 // io.listen(server);
-io.listen(Config.SOCKET_PORT);
+io.listen(process.env.PORT || Config.SOCKET_PORT);
 console.log('Listening on port: ' + Config.SOCKET_PORT);
