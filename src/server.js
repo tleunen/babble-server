@@ -13,15 +13,14 @@ function buildMessage(username, message) {
         msg: message
     };
 }
-function broadcast(type, message, except) {
+function broadcast(type, message, exceptUser) {
     var save = type == 'message_fs';
-    var list = UserManager.getAllAuthenticated();
 
-    for(var i=0, n=list.length; i<n; ++i) {
-        if(list[i] != except) {
-            list[i].clientSocket.emit(type, message);
-        }
-    }
+    UserManager.getAllAuthenticated().filter(function(user) {
+        return user != exceptUser;
+    }).forEach(function(user) {
+        user.clientSocket.emit(type, message);
+    });
 
     if(save) {
         ChatHistory.push(type, message);
@@ -76,5 +75,10 @@ io.on('connection', function(socket){
     });
 
 });
+
+
+// var server = require('http').createServer();
+// server.listen(Config.SOCKET_PORT, 'localhost');
+// io.listen(server);
 io.listen(Config.SOCKET_PORT);
 console.log('Listening on port: ' + Config.SOCKET_PORT);

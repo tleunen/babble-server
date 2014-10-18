@@ -4,6 +4,7 @@
   "description": "Babble chat server side",
   "author": "Tommy Leunen",
   "dependencies": {
+    "http": "0.0.0",
     "socket.io": "^1.1.0"
   },
   "scripts": {
