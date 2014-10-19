@@ -14,7 +14,7 @@ function buildMessage(username, message) {
     };
 }
 function broadcast(type, message, exceptUser) {
-    var save = type == 'message_fs';
+    var save = (type == 'send:message');
 
     UserManager.getAllAuthenticated().filter(function(user) {
         return user != exceptUser;
@@ -23,7 +23,7 @@ function broadcast(type, message, exceptUser) {
     });
 
     if(save) {
-        ChatHistory.push(type, message);
+        ChatHistory.push(message);
     }
 }
 
