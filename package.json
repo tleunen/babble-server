@@ -2,7 +2,22 @@
   "name": "babble-server",
   "version": "1.0.0",
   "description": "Babble chat server side",
-  "author": "Tommy Leunen",
+  "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tleunen/babble-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tleunen/babble-server/issues"
+  },
+  "homepage": "https://github.com/tleunen/babble-server",
+  "keywords": [
+    "node",
+    "chat",
+    "socket.io"
+  ],
+  "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
+  "license": "MIT",
   "dependencies": {
     "http": "0.0.0",
     "socket.io": "^1.1.0"
